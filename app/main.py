@@ -1,7 +1,8 @@
 import pyglet
 from pyglet.window import mouse
-from src.map import Map
-from src.simulation import Simulation
+
+from app.simulation.map import Map
+from app.simulation.simulation import Simulation
 
 
 class Window(pyglet.window.Window):
@@ -10,7 +11,7 @@ class Window(pyglet.window.Window):
         super().__init__(resizable=True, caption='Tourism Simulation', visible=False)
         self.set_minimum_size(640, 480)
         self.set_maximum_size(2260, 3540)
-        self.frame_rate = 1/60.0
+        self.frame_rate = 1 / 60.0
 
         self.icon1 = pyglet.image.load('./graphics/Icon1.png')
         self.icon2 = pyglet.image.load('./graphics/Icon2.png')
@@ -55,7 +56,6 @@ class Window(pyglet.window.Window):
 
 
 if __name__ == '__main__':
-
     window = Window('./graphics/Krk.png', 'configs/default/config.yaml')
     # Map based on map by Miejski System Informacji Przestrzennej
     pyglet.clock.schedule_interval(window.update, window.frame_rate)

@@ -1,7 +1,9 @@
 import unittest
 import math
 import numpy as np
-from src.path_finding import *
+from app.simulation.path_finding.point import Point
+from app.simulation.path_finding.walkpath import Walkpath
+from app.simulation.path_finding.grid import Grid
 
 
 class WalkpathTest(unittest.TestCase):
@@ -11,7 +13,7 @@ class WalkpathTest(unittest.TestCase):
         grid = self.walkable_grid()
         start_point = Point(3, 3)
         end_point = Point(4, 5)
-        walkpath = Walkpath(start_point, end_point, grid, 10, 10)
+        walkpath = Walkpath(start_point, end_point, grid)
 
         # when
         direction = walkpath.get_direction(3,4)

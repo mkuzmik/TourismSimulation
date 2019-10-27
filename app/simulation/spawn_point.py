@@ -1,7 +1,9 @@
-import pyglet
-from src.agent import Agent
 from random import randint
-from src.poilabel import PoiLabel
+
+import pyglet
+
+from app.simulation.agent import Agent
+from app.simulation.poilabel import PoiLabel
 
 
 class SpawnPoint:
@@ -40,7 +42,7 @@ class SpawnPoint:
         if name == "" or name is None:
             raise ValueError("Name can't be empty")
         attributes["name"] = name
-        
+
         return SpawnPoint(**attributes)
 
     def draw(self, windowx, windowy):

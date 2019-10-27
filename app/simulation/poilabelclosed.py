@@ -6,7 +6,7 @@ class PoiLabelClosed:
         self.name = name
         self.label = pyglet.text.Label(
             self.name, font_name='Calibri',
-            font_size=9, x=position_x+7, color=(164, 164, 164, 255),
+            font_size=9, x=position_x + 7, color=(164, 164, 164, 255),
             y=position_y, anchor_x='left', anchor_y='top')
 
         self.labelShadow = pyglet.text.Label(

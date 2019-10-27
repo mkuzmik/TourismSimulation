@@ -1,9 +1,10 @@
-import pyglet
-from poilabel import PoiLabel
-from poilabelclosed import PoiLabelClosed
 from datetime import datetime
 from time import strptime
 
+import pyglet
+
+from app.simulation.poilabel import PoiLabel
+from app.simulation.poilabelclosed import PoiLabelClosed
 
 
 class PointOfInterest:
@@ -44,7 +45,7 @@ class PointOfInterest:
         if name == "" or name is None:
             raise ValueError("Name can't be empty")
         attributes["name"] = name
-        
+
         return PointOfInterest(**attributes)
 
     def _time_from_timestamp(self, timestamp):
@@ -57,7 +58,7 @@ class PointOfInterest:
 
     def update(self, timestamp):
         if self._time_from_timestamp(timestamp) < self._time_from_string(self.time_open) or \
-                        self._time_from_timestamp(timestamp) > self._time_from_string(self.time_close):
+                self._time_from_timestamp(timestamp) > self._time_from_string(self.time_close):
             self.sprite = pyglet.sprite.Sprite(self.imgClosed, x=self.x, y=self.y)
             self.label = self.labelClosed
         else:
@@ -69,12 +70,3 @@ class PointOfInterest:
         self.sprite.y = windowy + self.y
         self.sprite.draw()
         self.label.draw(self.sprite.x, self.sprite.y)
-
-
-
-
-
-
-
-
-

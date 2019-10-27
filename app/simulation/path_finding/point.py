@@ -1,5 +1,6 @@
-import pyglet
 import math
+
+import pyglet
 
 
 class Point:
@@ -38,7 +39,7 @@ class Point:
         length = self.distance_from(Point(0, 0))
         if length == 0:
             return Point(0, 0)
-        return Point(self.x/length, self.y/length)
+        return Point(self.x / length, self.y / length)
 
     def diff(self, point):
         return Point(self.x - point.x, self.y - point.y)

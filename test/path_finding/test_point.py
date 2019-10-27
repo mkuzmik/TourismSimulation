@@ -1,5 +1,6 @@
 import unittest
-from src.path_finding.walkpath import *
+import math
+from app.simulation.path_finding.walkpath import *
 
 
 class PointTest(unittest.TestCase):

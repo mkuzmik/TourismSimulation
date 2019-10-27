@@ -14,7 +14,7 @@ class Label:
             font_size=9, x=window_width - 7, color=(0, 0, 0, 255),
             y=3, anchor_x='right', anchor_y='bottom')
 
-    def draw(self,window_width):
+    def draw(self, window_width):
         self.label = pyglet.text.Label(
             self.watermark, font_name='Calibri',
             font_size=9, x=window_width - 8,

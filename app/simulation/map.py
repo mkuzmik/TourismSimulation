@@ -1,5 +1,6 @@
 import pyglet
-from label import Label;
+
+from app.simulation.label import Label
 
 watermark = 'Modelowanie i symulacja systemów, Szymon Jakóbczyk, Mateusz Kuźmik, Paweł Płatek'
 
@@ -13,6 +14,5 @@ class Map:
         self.label = Label(window_width)
 
     def draw(self, window_width, window_height, x, y):
-
         self.krakow_map.blit(x, y)
         self.label.draw(window_width)

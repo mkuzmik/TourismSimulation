@@ -1,10 +1,9 @@
 import numpy as np
-
 import pyglet
 
-from src.path_finding.grid import Grid
-from src.path_finding.point import Point
-from src.path_finding.walkpath import Walkpath
+from app.simulation.path_finding.grid import Grid
+from app.simulation.path_finding.point import Point
+from app.simulation.path_finding.walkpath import Walkpath
 
 
 class Agent:
@@ -94,8 +93,8 @@ class Agent:
         print("Leave poi " + self.current_poi.name)
         if len(self.schedule) > 0:
             self.current_poi = self.schedule.pop()
-        else: # shouldn't occur, last poi in schedule should be spawn_point
-            self.current_poi = self.simulation.pois[np.random.randint(0, len(self.simulation.pois)-1)]
+        else:  # shouldn't occur, last poi in schedule should be spawn_point
+            self.current_poi = self.simulation.pois[np.random.randint(0, len(self.simulation.pois) - 1)]
         self.walkpath = Walkpath.from_agent(self)
         self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
 

@@ -107,6 +107,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-*HeatMap*
+*HeatMap*.png
 output/s
+*.iml
 

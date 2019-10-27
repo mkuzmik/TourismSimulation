@@ -1,6 +1,7 @@
-from src.path_finding.point import Point
 import random
-from src.path_finding.path_finders.path_finder_base import PathFinderBase
+
+from app.simulation.path_finding.path_finders.path_finder_base import PathFinderBase
+from app.simulation.path_finding.point import Point
 
 
 class HeavyPathFinder(PathFinderBase):
@@ -38,7 +39,6 @@ class HeavyPathFinder(PathFinderBase):
             except:
                 self.step = self.step - 2
                 return self.get_path(start_point, end_point)
-
 
         path = path_finding_queue.get_path()
         return path

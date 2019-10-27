@@ -5,11 +5,11 @@ import numpy as np
 import yaml
 from PIL import Image
 
-from src.heatmap import Heatmap
-from src.point_of_interest import PointOfInterest
-from src.schedules_generator import SchedulesGenerator
-from src.spawn_point import SpawnPoint
-from src.timebox import Timebox
+from app.simulation.heatmap import Heatmap
+from app.simulation.point_of_interest import PointOfInterest
+from app.simulation.schedules_generator import SchedulesGenerator
+from app.simulation.spawn_point import SpawnPoint
+from app.simulation.timebox import Timebox
 
 
 class Simulation:
@@ -111,4 +111,3 @@ class Simulation:
         list(map(lambda spawn: spawn.draw(windowx, windowy), self.spawn_points))
         list(map(lambda poi: poi.draw(windowx, windowy), self.pois))
         self.timebox.draw(window_width, window_height)
-

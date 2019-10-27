@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from src.path_finding.point import Point
+
+from app.simulation.path_finding.point import Point
 
 
 class PathFinderBase(ABC):
