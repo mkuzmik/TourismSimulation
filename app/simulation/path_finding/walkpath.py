@@ -2,6 +2,10 @@ from app.simulation.path_finding.path_cache import PathCache, PathNotInCacheExce
 from app.simulation.path_finding.path_finders.heavy_path_finder import HeavyPathFinder
 from app.simulation.path_finding.point import Point
 
+import logging
+
+log = logging.getLogger('Walkpath')
+
 
 class Walkpath:
 
@@ -42,7 +46,7 @@ class Walkpath:
             try:
                 self.walk_queue = self.path_finder.get_path(self.start_point, self.end_point)
             except:
-                print('ERROR: Not able to generate walkpath from {} to {}'.format(self.start_point, self.end_point))
+                log.debug('ERROR: Not able to generate walkpath from {} to {}'.format(self.start_point, self.end_point))
                 self.walk_queue = [self.end_point]
             PathCache().put(self.start_point, self.end_point, self.walk_queue)
         return

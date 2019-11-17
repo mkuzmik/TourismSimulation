@@ -9,16 +9,8 @@ class Timebox:
         self.x = window_width
         self.y = window_height
 
-        self.label = self.label = pyglet.text.Label(
-            self.to_string(), color=(255, 255, 255, 255),
-            font_name='Calibri', font_size=12,
-            x=self.x - 4, y=self.y - 3,
-            anchor_x='right', anchor_y='top')
-
-        self.labelShadow = pyglet.text.Label(
-            self.to_string(), font_name='Calibri',
-            font_size=12, x=self.x - 3, color=(0, 0, 0, 255),
-            y=self.y - 4, anchor_x='right', anchor_y='top')
+        self.label = None
+        self.labelShadow = None
 
     def to_string(self):
         return datetime.datetime.fromtimestamp(self.timestamp).strftime('%H:%M:%S')

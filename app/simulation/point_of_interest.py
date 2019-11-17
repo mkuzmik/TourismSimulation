@@ -23,13 +23,9 @@ class PointOfInterest:
         self.time_close = time_close
         self.type = poi_type
 
-        self.img = pyglet.image.load('./graphics/POI.png')
-        self.imgClosed = pyglet.image.load('./graphics/POI_closed.png')
-        self.img.anchor_x = self.img.width // 2
-        self.img.anchor_y = self.img.height // 2
-        self.imgClosed.anchor_x = self.img.width // 2
-        self.imgClosed.anchor_y = self.img.height // 2
-        self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
+        self.img = None
+        self.imgClosed = None
+        self.sprite = None
 
         self.labelOpen = PoiLabel(name, x, y)
         self.labelClosed = PoiLabelClosed(name, x, y)
@@ -66,6 +62,16 @@ class PointOfInterest:
             self.label = self.labelOpen
 
     def draw(self, windowx, windowy):
+        if self.img is None:
+            self.img = pyglet.image.load('./graphics/POI.png')
+            self.img.anchor_x = self.img.width // 2
+            self.img.anchor_y = self.img.height // 2
+        if self.imgClosed is None:
+            self.imgClosed = pyglet.image.load('./graphics/POI_closed.png')
+            self.imgClosed.anchor_x = self.img.width // 2
+            self.imgClosed.anchor_y = self.img.height // 2
+        if self.sprite is None:
+            self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
         self.sprite.x = windowx + self.x
         self.sprite.y = windowy + self.y
         self.sprite.draw()

@@ -10,6 +10,9 @@ from app.simulation.point_of_interest import PointOfInterest
 from app.simulation.schedules_generator import SchedulesGenerator
 from app.simulation.spawn_point import SpawnPoint
 from app.simulation.timebox import Timebox
+import logging
+
+log = logging.getLogger('Agent')
 
 
 class Simulation:
@@ -93,8 +96,7 @@ class Simulation:
 
         if self.simulation_delta_time >= self.time_density:
             simulation_delta_time_rounded = round(self.simulation_delta_time)
-            if self.DEBUG:
-                print("Real time:", round(self.real_time, 2),
+            log.debug("Real time:", round(self.real_time, 2),
                       "  |  Simulation time:", round(self.real_time * self.time_speed, 2),
                       "  |  Time delta: ", round(self.simulation_delta_time, 2))
 

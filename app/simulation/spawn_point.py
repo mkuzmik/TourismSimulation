@@ -5,6 +5,10 @@ import pyglet
 from app.simulation.agent import Agent
 from app.simulation.poilabel import PoiLabel
 
+import logging
+
+log = logging.getLogger('SpawnPoint')
+
 
 class SpawnPoint:
 
@@ -24,11 +28,8 @@ class SpawnPoint:
         self.last_bus = -1
         self.bus_average_number_of_passengers = bus_average_number_of_passengers
 
-        self.img = pyglet.image.load('./graphics/Spawn.png')
-        self.img.anchor_x = self.img.width // 2
-        self.img.anchor_y = self.img.height // 2
-        self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
-
+        self.img = None
+        self.sprite = None
         self.label = PoiLabel(name, x, y)
         self.time_needed = 0
 
@@ -46,6 +47,12 @@ class SpawnPoint:
         return SpawnPoint(**attributes)
 
     def draw(self, windowx, windowy):
+        if self.sprite is None:
+            self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
+        if self.img is None:
+            self.img = pyglet.image.load('./graphics/Spawn.png')
+            self.img.anchor_x = self.img.width // 2
+            self.img.anchor_y = self.img.height // 2
         self.sprite.x = windowx + self.x
         self.sprite.y = windowy + self.y
         self.sprite.draw()
@@ -57,8 +64,7 @@ class SpawnPoint:
 
     def _agents_in_bus(self, simulation):
         agents_amount = self.bus_average_number_of_passengers + randint(-1, 1)
-        if simulation.DEBUG:
-            print("Bus arrived, point: {}, new agents: {}".format(self.name, agents_amount))
+        log.debug("Bus arrived, point: {}, new agents: {}".format(self.name, agents_amount))
         return agents_amount
 
     def update(self, simulation_delta_time, simulation):

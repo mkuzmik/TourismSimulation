@@ -6,5 +6,5 @@ speed_multiplier: 25
 time_density: 1
 pixels_per_meter: 1.5 #on default map: 1.5
 heatmap_multiplier: 2 #adjusting heatmap intensity
-DEBUG: FALSE
-DEBUG_SCHEDULER: FALSE
+DEBUG: TRUE
+DEBUG_SCHEDULER: TRUE

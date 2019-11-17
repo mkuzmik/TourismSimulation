@@ -5,6 +5,10 @@ from app.simulation.path_finding.grid import Grid
 from app.simulation.path_finding.point import Point
 from app.simulation.path_finding.walkpath import Walkpath
 
+import logging
+
+log = logging.getLogger('Simulation')
+
 
 class Agent:
 
@@ -32,14 +36,10 @@ class Agent:
         self.inside_poi = False
         self.time_to_spend = None
 
-        self.walking_img = pyglet.image.load('./graphics/Pin.png')
-        self.walking_img.anchor_x = self.walking_img.width // 2
-        self.walking_img.anchor_y = self.walking_img.height // 2
-        self.inside_poi_img = pyglet.image.load('./graphics/Pin2.png')
-        self.inside_poi_img.anchor_x = self.inside_poi_img.width // 2
-        self.inside_poi_img.anchor_y = self.inside_poi_img.height // 2
+        self.walking_img = None
+        self.inside_poi_img = None
 
-        self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
+        self.sprite = None
 
     @staticmethod
     def generate(simulation, x, y, spawn_point):
@@ -79,7 +79,7 @@ class Agent:
         self.posy = self.current_poi.y
 
         self.inside_poi = True
-        print("Inside poi " + self.current_poi.name)
+        log.debug("Inside poi " + self.current_poi.name)
         self.time_to_spend = self.current_poi.time_needed * 60  # in seconds
         self.sprite = pyglet.sprite.Sprite(self.inside_poi_img, x=self.posx, y=self.posy)
 
@@ -90,7 +90,7 @@ class Agent:
 
     def poi_leaved(self):
         self.inside_poi = False
-        print("Leave poi " + self.current_poi.name)
+        log.debug("Leave poi " + self.current_poi.name)
         if len(self.schedule) > 0:
             self.current_poi = self.schedule.pop()
         else:  # shouldn't occur, last poi in schedule should be spawn_point
@@ -99,6 +99,16 @@ class Agent:
         self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
 
     def draw(self, windowx, windowy):
+        if self.walking_img is None:
+            self.walking_img = pyglet.image.load('./graphics/Pin.png')
+            self.walking_img.anchor_x = self.walking_img.width // 2
+            self.walking_img.anchor_y = self.walking_img.height // 2
+        if self.inside_poi_img is None:
+            self.inside_poi_img = pyglet.image.load('./graphics/Pin2.png')
+            self.inside_poi_img.anchor_x = self.inside_poi_img.width // 2
+            self.inside_poi_img.anchor_y = self.inside_poi_img.height // 2
+        if self.sprite is None:
+            self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
         self.sprite.x = windowx + self.posx
         self.sprite.y = windowy + self.posy
         self.sprite.draw()
@@ -124,7 +134,7 @@ class Agent:
             next_y += self.speed * direction_y
 
         # (sqrt((self.posx - next_x)**2 + (self.posy - next_y)**2)) ~= self.speed * simulation_delta_time
-        # print(sqrt((self.posx - next_x)**2 + (self.posy - next_y)**2), self.speed * simulation_delta_time)
+        # log.debug(sqrt((self.posx - next_x)**2 + (self.posy - next_y)**2), self.speed * simulation_delta_time)
         self.pixels_walked += self.speed * simulation_delta_time
         self.posx = round(next_x)
         self.posy = round(next_y)
