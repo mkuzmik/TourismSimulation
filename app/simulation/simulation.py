@@ -12,7 +12,7 @@ from app.simulation.spawn_point import SpawnPoint
 from app.simulation.timebox import Timebox
 import logging
 
-log = logging.getLogger('Agent')
+log = logging.getLogger('Simulation')
 
 
 class Simulation:
@@ -20,6 +20,7 @@ class Simulation:
     def __init__(self, size_x, size_y, window_width, window_height, config_file):
         # load yaml configuration files with objects
         try:
+            log.info('Reading simulation config from file {}'.format(config_file))
             with open(config_file, 'r') as config:
                 config = yaml.safe_load(config)
         except FileNotFoundError as e:
@@ -96,9 +97,8 @@ class Simulation:
 
         if self.simulation_delta_time >= self.time_density:
             simulation_delta_time_rounded = round(self.simulation_delta_time)
-            log.debug("Real time:", round(self.real_time, 2),
-                      "  |  Simulation time:", round(self.real_time * self.time_speed, 2),
-                      "  |  Time delta: ", round(self.simulation_delta_time, 2))
+            log.info("Real time: {} | Simulation time: {} | Time delta: {}".format(round(self.real_time, 2), round(
+                self.real_time * self.time_speed, 2), round(self.simulation_delta_time, 2)))
 
             list(map(lambda spawn_point: spawn_point.update(simulation_delta_time_rounded, self), self.spawn_points))
             list(map(lambda agent: agent.update(simulation_delta_time_rounded), self.agents))
@@ -106,7 +106,8 @@ class Simulation:
             self.timebox.update(self.simulation_delta_time)
             self.simulation_delta_time -= simulation_delta_time_rounded
 
-        self.heatmap.update(self.agents, self.timebox.timestamp)
+        # TODO heatmap to statistics server
+        # self.heatmap.update(self.agents, self.timebox.timestamp)
 
     def draw(self, windowx, windowy, window_width, window_height):
         list(map(lambda agent: agent.draw(windowx, windowy), self.agents))

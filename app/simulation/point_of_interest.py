@@ -22,6 +22,7 @@ class PointOfInterest:
         self.time_open = time_open
         self.time_close = time_close
         self.type = poi_type
+        self.closed = False
 
         self.img = None
         self.imgClosed = None
@@ -53,13 +54,8 @@ class PointOfInterest:
         return (tmp.tm_hour * 60) + tmp.tm_min
 
     def update(self, timestamp):
-        if self._time_from_timestamp(timestamp) < self._time_from_string(self.time_open) or \
-                self._time_from_timestamp(timestamp) > self._time_from_string(self.time_close):
-            self.sprite = pyglet.sprite.Sprite(self.imgClosed, x=self.x, y=self.y)
-            self.label = self.labelClosed
-        else:
-            self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
-            self.label = self.labelOpen
+        self.closed = self._time_from_timestamp(timestamp) < self._time_from_string(self.time_open) or \
+                      self._time_from_timestamp(timestamp) > self._time_from_string(self.time_close)
 
     def draw(self, windowx, windowy):
         if self.img is None:
@@ -72,6 +68,14 @@ class PointOfInterest:
             self.imgClosed.anchor_y = self.img.height // 2
         if self.sprite is None:
             self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
+
+        if self.closed:
+            self.sprite = pyglet.sprite.Sprite(self.imgClosed, x=self.x, y=self.y)
+            self.label = self.labelClosed
+        else:
+            self.sprite = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
+            self.label = self.labelOpen
+
         self.sprite.x = windowx + self.x
         self.sprite.y = windowy + self.y
         self.sprite.draw()

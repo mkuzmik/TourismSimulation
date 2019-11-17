@@ -25,9 +25,7 @@ class SimulationRunner(threading.Thread):
                 log.info('Running simulation')
                 self.simulation.update(1 / 60)
         except Exception as ex:
-            log.error('Stopped because of {}'.format(ex))
-            # TODO temporart thrown error
-            raise ex
+            log.exception(ex)
         finally:
             log.info('Simulation runner stopped')
 

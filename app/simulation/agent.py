@@ -81,7 +81,6 @@ class Agent:
         self.inside_poi = True
         log.debug("Inside poi " + self.current_poi.name)
         self.time_to_spend = self.current_poi.time_needed * 60  # in seconds
-        self.sprite = pyglet.sprite.Sprite(self.inside_poi_img, x=self.posx, y=self.posy)
 
     def next_poi(self):
         if len(self.schedule) > 0:
@@ -96,7 +95,6 @@ class Agent:
         else:  # shouldn't occur, last poi in schedule should be spawn_point
             self.current_poi = self.simulation.pois[np.random.randint(0, len(self.simulation.pois) - 1)]
         self.walkpath = Walkpath.from_agent(self)
-        self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
 
     def draw(self, windowx, windowy):
         if self.walking_img is None:
@@ -109,6 +107,12 @@ class Agent:
             self.inside_poi_img.anchor_y = self.inside_poi_img.height // 2
         if self.sprite is None:
             self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
+
+        if self.inside_poi:
+            self.sprite = pyglet.sprite.Sprite(self.inside_poi_img, x=self.posx, y=self.posy)
+        else:
+            self.sprite = pyglet.sprite.Sprite(self.walking_img, x=self.posx, y=self.posy)
+
         self.sprite.x = windowx + self.posx
         self.sprite.y = windowy + self.posy
         self.sprite.draw()
