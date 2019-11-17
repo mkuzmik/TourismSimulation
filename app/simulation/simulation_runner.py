@@ -1,9 +1,8 @@
-import time
-import threading
 import logging
-from app.simulation.simulation import Simulation
+import threading
 
 from app.exception.simulation_exceptions import *
+from app.simulation.simulation import Simulation
 
 log = logging.getLogger('SimulationRunner')
 
@@ -13,7 +12,7 @@ class SimulationRunner(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
         self.should_run = True
-        self.simulation = Simulation(2260, 3540, 2260, 3540, 'configs/default/config.yaml')
+        self.simulation = Simulation(2260, 3540, 2260, 3540, 'configs/one_agent/config.yaml')
         log.info('Thread instantiated')
 
     def stop_gracefully(self):
@@ -24,9 +23,11 @@ class SimulationRunner(threading.Thread):
         try:
             while self.should_run:
                 log.info('Running simulation')
-                self.simulation.update(1/60)
+                self.simulation.update(1 / 60)
         except Exception as ex:
             log.error('Stopped because of {}'.format(ex))
+            # TODO temporart thrown error
+            raise ex
         finally:
             log.info('Simulation runner stopped')
 
@@ -47,4 +48,3 @@ def stop_simulation():
     global RUNNER
     if RUNNER is not None and isinstance(RUNNER, SimulationRunner):
         RUNNER.stop_gracefully()
-

@@ -68,7 +68,7 @@ class Simulation:
         self.grid = None
         self.prepare_grid()
 
-        self.scheduler = SchedulesGenerator(self.pois, config['DEBUG_SCHEDULER'])
+        self.scheduler = SchedulesGenerator(self.pois)
 
         timestamp = int(time.mktime(time.strptime('18/01/2018 ' + config['start_time'], "%d/%m/%Y %H:%M")))
         self.timebox = Timebox(timestamp, window_width, window_height)

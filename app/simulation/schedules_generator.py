@@ -10,9 +10,8 @@ log = logging.getLogger('SchedulesGenerator')
 
 class SchedulesGenerator:
 
-    def __init__(self, pois, debug):
+    def __init__(self, pois):
         self.pois = pois
-        self.debug = debug
 
     def _time_from_timestamp(self, timestamp):
         tmp = datetime.fromtimestamp(timestamp)

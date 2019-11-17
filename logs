@@ -1,0 +1,1 @@
+docker logs -f tourism_simulation_server
