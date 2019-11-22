@@ -12,6 +12,7 @@ class SimulationRunner(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
         self.should_run = True
+        self.started = False
         self.simulation = Simulation(2260, 3540, 2260, 3540, 'configs/one_agent/config.yaml')
         log.info('Thread instantiated')
 
@@ -21,13 +22,18 @@ class SimulationRunner(threading.Thread):
 
     def run(self) -> None:
         try:
+            self.started = True
             while self.should_run:
                 log.info('Running simulation')
                 self.simulation.update(1 / 60)
         except Exception as ex:
             log.exception(ex)
         finally:
+            self.started = False
             log.info('Simulation runner stopped')
+
+    def is_started(self):
+        return self.started
 
 
 RUNNER = None
@@ -35,7 +41,7 @@ RUNNER = None
 
 def run_simulation():
     global RUNNER
-    if RUNNER is not None and isinstance(RUNNER, SimulationRunner):
+    if RUNNER is not None and RUNNER.is_started():
         log.error('Simulation already started')
         raise SimulationAlreadyStartedException()
     RUNNER = SimulationRunner()
