@@ -2,12 +2,18 @@ version: '2'
 
 services:
   simulation_app:
-    build: .
+    container_name: tourism_simulation_service
+    build:
+      context: .
+      dockerfile: ./Dockerfile_simulation_service
     ports:
       - "5000:5000"
-    container_name: tourism_simulation_service
-    depends_on:
-      - database
+
+  migrations:
+    container_name: tourism_migrations
+    build:
+      context: .
+      dockerfile: ./Dockerfile_migrations
 
   database:
     container_name: tourism_database
