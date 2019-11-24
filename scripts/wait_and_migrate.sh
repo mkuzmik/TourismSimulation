@@ -6,5 +6,7 @@ do
   sleep 1;
 done;
 echo Connected!;
+sleep 5;
+echo 'Migrating'
 
 yoyo apply --config ../yoyo.ini
