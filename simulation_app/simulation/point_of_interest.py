@@ -3,8 +3,8 @@ from time import strptime
 
 import pyglet
 
-from app.simulation.poilabel import PoiLabel
-from app.simulation.poilabelclosed import PoiLabelClosed
+from simulation_app.simulation.poilabel import PoiLabel
+from simulation_app.simulation.poilabelclosed import PoiLabelClosed
 
 
 class PointOfInterest:

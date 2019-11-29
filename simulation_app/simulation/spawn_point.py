@@ -2,8 +2,8 @@ from random import randint
 
 import pyglet
 
-from app.simulation.agent import Agent
-from app.simulation.poilabel import PoiLabel
+from simulation_app.simulation.agent import Agent
+from simulation_app.simulation.poilabel import PoiLabel
 
 import logging
 

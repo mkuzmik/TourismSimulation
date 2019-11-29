@@ -2,9 +2,9 @@ import os
 
 from werkzeug.exceptions import InternalServerError
 
-import app.logging.logging_config as logging_config
-import app.simulation.simulation_runner as simulation_runner
-from app.exception.app_exception import AppException
+import simulation_app.logging.logging_config as logging_config
+import simulation_app.simulation.simulation_runner as simulation_runner
+from simulation_app.exception.app_exception import AppException
 import logging
 
 from flask import Flask

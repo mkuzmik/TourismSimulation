@@ -1,9 +1,9 @@
 import numpy as np
 import pyglet
 
-from app.simulation.path_finding.grid import Grid
-from app.simulation.path_finding.point import Point
-from app.simulation.path_finding.walkpath import Walkpath
+from simulation_app.simulation.path_finding.grid import Grid
+from simulation_app.simulation.path_finding.point import Point
+from simulation_app.simulation.path_finding.walkpath import Walkpath
 
 import logging
 

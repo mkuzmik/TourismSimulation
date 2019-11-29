@@ -1,6 +1,6 @@
-from app.simulation.path_finding.path_cache import PathCache, PathNotInCacheException
-from app.simulation.path_finding.path_finders.heavy_path_finder import HeavyPathFinder
-from app.simulation.path_finding.point import Point
+from simulation_app.simulation.path_finding.path_cache import PathCache, PathNotInCacheException
+from simulation_app.simulation.path_finding.path_finders.heavy_path_finder import HeavyPathFinder
+from simulation_app.simulation.path_finding.point import Point
 
 import logging
 

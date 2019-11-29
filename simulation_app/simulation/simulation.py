@@ -5,11 +5,11 @@ import numpy as np
 import yaml
 from PIL import Image
 
-from app.simulation.heatmap import Heatmap
-from app.simulation.point_of_interest import PointOfInterest
-from app.simulation.schedules_generator import SchedulesGenerator
-from app.simulation.spawn_point import SpawnPoint
-from app.simulation.timebox import Timebox
+from simulation_app.simulation.heatmap import Heatmap
+from simulation_app.simulation.point_of_interest import PointOfInterest
+from simulation_app.simulation.schedules_generator import SchedulesGenerator
+from simulation_app.simulation.spawn_point import SpawnPoint
+from simulation_app.simulation.timebox import Timebox
 import logging
 
 log = logging.getLogger('Simulation')

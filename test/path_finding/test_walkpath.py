@@ -1,9 +1,9 @@
 import unittest
 import math
 import numpy as np
-from app.simulation.path_finding.point import Point
-from app.simulation.path_finding.walkpath import Walkpath
-from app.simulation.path_finding.grid import Grid
+from simulation_app.simulation.path_finding.point import Point
+from simulation_app.simulation.path_finding.walkpath import Walkpath
+from simulation_app.simulation.path_finding.grid import Grid
 
 
 class WalkpathTest(unittest.TestCase):

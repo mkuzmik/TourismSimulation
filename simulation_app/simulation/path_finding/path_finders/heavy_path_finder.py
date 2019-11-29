@@ -1,7 +1,7 @@
 import random
 
-from app.simulation.path_finding.path_finders.path_finder_base import PathFinderBase
-from app.simulation.path_finding.point import Point
+from simulation_app.simulation.path_finding.path_finders.path_finder_base import PathFinderBase
+from simulation_app.simulation.path_finding.point import Point
 
 
 class HeavyPathFinder(PathFinderBase):

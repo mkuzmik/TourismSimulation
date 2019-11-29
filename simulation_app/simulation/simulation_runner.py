@@ -1,8 +1,8 @@
 import logging
 import threading
 
-from app.exception.simulation_exceptions import *
-from app.simulation.simulation import Simulation
+from simulation_app.exception.simulation_exceptions import *
+from simulation_app.simulation.simulation import Simulation
 
 log = logging.getLogger('SimulationRunner')
 

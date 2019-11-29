@@ -1,4 +1,4 @@
-from app.exception.app_exception import AppException
+from simulation_app.exception.app_exception import AppException
 
 
 class SimulationAlreadyStartedException(AppException):
