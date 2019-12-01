@@ -1,6 +1,9 @@
 FROM python:3.7
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-COPY . /app
+COPY simulation_app /app/simulation_app
+COPY configs /app/configs
+COPY graphics /app/graphics
+COPY main.py /app/main.py
 WORKDIR /app
 ENTRYPOINT ["python", "main.py"]

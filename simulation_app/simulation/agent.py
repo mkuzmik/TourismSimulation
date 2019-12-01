@@ -13,6 +13,8 @@ log = logging.getLogger('Simulation')
 class Agent:
 
     def __init__(self, simulation, posx, posy, age, wealth, domestic, education, intoxication):
+        self.id = None
+
         self.posx = posx
         self.posy = posy
 

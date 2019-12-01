@@ -16,8 +16,7 @@ steps = [
     CREATE TABLE agent (
         id BIGSERIAL PRIMARY KEY NOT NULL,
         simulation_id BIGINT REFERENCES simulation(id),
-        age INT NOT NULL,
-        properties JSONB NULL)
+        age INT NOT NULL)
          """),
     step("""
     CREATE TABLE point_of_interest (
