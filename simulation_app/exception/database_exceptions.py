@@ -1,7 +1,7 @@
-from simulation_app.exception.app_exception import AppException
+from simulation_app.exception.app_exceptions import FatalException
 
 
-class DatabaseConnectionException(AppException):
+class DatabaseConnectionException(FatalException):
     def __init__(self):
-        AppException.__init__(self)
+        FatalException.__init__(self)
         self.message = 'Cannot connect to database'

@@ -12,29 +12,30 @@ class AgentMapper:
         self.db = db
 
     def create_agent(self, agent: Agent):
-        log.debug('Adding new agent to DB: {}'.format(agent))
+        log.debug('Adding new agent to DB: %s'.format(agent))
         cursor = self.db.get_cursor()
         cursor.execute('''
         INSERT INTO agent (
             simulation_id, age
         ) VALUES (
-            {},
-            {}
+            %s,
+            %s
         ) RETURNING id;
-        '''.format(agent.simulation.id, agent.age))
+        ''', (agent.simulation.id, int(agent.age)))
         agent.id = cursor.fetchone()[0]
         cursor.close()
 
     def update_agent_state(self, agent: Agent, simulation_time: int):
-        log.debug('Adding agent state to DB: {}'.format(agent))
+        log.debug('Adding agent state to DB: %s'.format(agent))
         cursor = self.db.get_cursor()
+        poi_id = agent.current_poi.id if agent.inside_poi is True else None
         cursor.execute('''
         INSERT INTO agent_spacetime_location (
-            agent_id, simulation_time, x, y
+            agent_id, simulation_time, x, y, point_of_interest_id
         ) VALUES (
-            {}, to_timestamp({}), {}, {}
+            %s, to_timestamp(%s), %s, %s, %s
         );
-        '''.format(agent.id, simulation_time, agent.posx, agent.posy))
+        ''', (agent.id, simulation_time, agent.posx, agent.posy, poi_id))
         cursor.close()
 
 

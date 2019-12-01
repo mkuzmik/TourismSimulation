@@ -22,10 +22,10 @@ steps = [
     CREATE TABLE point_of_interest (
         id BIGSERIAL PRIMARY KEY NOT NULL,
         simulation_id BIGINT REFERENCES simulation(id),
+        name TEXT NOT NULL,
         x_location INT NOT NULL,
         y_location INT NOT NULL,
-        type TEXT NOT NULL,
-        properties JSONB NULL)
+        type TEXT NOT NULL)
     """),
     step("""
     CREATE TABLE agent_spacetime_location (

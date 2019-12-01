@@ -4,7 +4,7 @@ from werkzeug.exceptions import InternalServerError
 
 import simulation_app.logging.logging_config as logging_config
 import simulation_app.simulation.simulation_runner as simulation_runner
-from simulation_app.exception.app_exception import AppException
+from simulation_app.exception.app_exceptions import AppException, FatalException
 import logging
 
 from flask import Flask
@@ -51,6 +51,11 @@ def create_app(test_config=None):
     def handle_bad_request(e):
         log.error(e.message)
         return e.message, 400
+
+    @app.errorhandler(FatalException)
+    def handle_bad_request(e):
+        log.error(e.message)
+        return e.message, 500
 
     @app.errorhandler(InternalServerError)
     def handle_500(e):

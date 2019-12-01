@@ -28,6 +28,8 @@ class PointOfInterest:
         self.imgClosed = None
         self.sprite = None
 
+        self.id = None
+
         self.labelOpen = PoiLabel(name, x, y)
         self.labelClosed = PoiLabelClosed(name, x, y)
         self.label = self.labelOpen
