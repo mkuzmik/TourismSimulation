@@ -32,6 +32,7 @@ steps = [
     step("""
     CREATE TABLE agent_spacetime_location (
         id BIGSERIAL PRIMARY KEY NOT NULL,
+        simulation_id BIGINT REFERENCES simulation(id),
         agent_id BIGINT REFERENCES agent(id),
         simulation_time timestamp NOT NULL,
         x INT NOT NULL,

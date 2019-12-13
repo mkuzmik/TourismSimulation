@@ -31,11 +31,11 @@ class AgentMapper:
         poi_id = agent.current_poi.id if agent.inside_poi is True else None
         cursor.execute('''
         INSERT INTO agent_spacetime_location (
-            agent_id, simulation_time, x, y, point_of_interest_id
+            agent_id, simulation_id, simulation_time, x, y, point_of_interest_id
         ) VALUES (
-            %s, to_timestamp(%s), %s, %s, %s
+            %s, %s, to_timestamp(%s), %s, %s, %s
         );
-        ''', (agent.id, simulation_time, agent.posx, agent.posy, poi_id))
+        ''', (agent.id, agent.simulation.id, simulation_time, agent.posx, agent.posy, poi_id))
         cursor.close()
 
     def find_all_agents_positions(self):
