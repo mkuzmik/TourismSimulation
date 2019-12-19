@@ -8,6 +8,7 @@ from simulation_app.exception.app_exceptions import AppException, FatalException
 import logging
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 log = logging.getLogger('Main')
 
@@ -19,6 +20,7 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    CORS(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -40,6 +42,10 @@ def create_app(test_config=None):
     @app.route('/status/pois')
     def pois():
         return jsonify(simulation_runner.simulation_service.get_instance().poi_mapper.find_all_pois())
+
+    @app.route('/status/agents/positions')
+    def agents():
+        return jsonify(simulation_runner.simulation_service.get_instance().agent_mapper.find_all_agents_positions())
 
     @app.route('/simulation/start')
     def start_simulation():

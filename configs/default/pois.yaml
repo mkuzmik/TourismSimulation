@@ -33,12 +33,12 @@ StMary:
     name: "St. Mary's Basilica"
     coordinates: "947,759,808,821"
     shape: "rect"
-    attractiveness: 6 #(google maps rating -2.5) * 4
+    attractiveness: 9 #(google maps rating -2.5) * 4
     price: 2 #1-10
-    people_limit: 80
+    people_limit: 30
     time_needed: 20 #in minutes
-    time_open: '00:01'
-    time_close: '23:59'
+    time_open: '11:00'
+    time_close: '18:00'
     poi_type: 'Heritage'
 
 Sukiennice:

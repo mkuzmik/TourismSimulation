@@ -38,6 +38,14 @@ class AgentMapper:
         ''', (agent.id, simulation_time, agent.posx, agent.posy, poi_id))
         cursor.close()
 
+    def find_all_agents_positions(self):
+        log.debug('Fetching agents positions from DB')
+        cursor = self.db.get_cursor()
+        cursor.execute('''
+        SELECT x, y FROM agent_spacetime_location
+        ''')
+        agents = cursor.fetchall()
+        return [{'x': agent[0], 'y': agent[1]} for agent in agents]
 
 INSTANCE = AgentMapper(db=db_connection.get_instance())
 
