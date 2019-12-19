@@ -25,7 +25,9 @@ steps = [
         name TEXT NOT NULL,
         x_location INT NOT NULL,
         y_location INT NOT NULL,
-        type TEXT NOT NULL)
+        type TEXT NOT NULL,
+        shape TEXT NOT NULL,
+        coordinates TEXT NOT NULL)
     """),
     step("""
     CREATE TABLE agent_spacetime_location (

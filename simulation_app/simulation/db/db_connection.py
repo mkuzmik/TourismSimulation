@@ -38,7 +38,7 @@ class DbConnection:
 
 
 # TODO config to file
-INSTANCE = DbConnection(host='tourism_database',
+INSTANCE = DbConnection(host='127.0.0.1',
                         database='tourism',
                         username='root',
                         password='admin')

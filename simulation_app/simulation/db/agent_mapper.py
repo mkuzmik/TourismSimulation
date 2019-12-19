@@ -1,6 +1,6 @@
 import logging
 
-from simulation_app.simulation.agent import Agent
+from simulation_app.simulation.model.agent import Agent
 from simulation_app.simulation.db import db_connection
 from simulation_app.simulation.db.db_connection import DbConnection
 

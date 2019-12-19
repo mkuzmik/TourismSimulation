@@ -5,11 +5,11 @@ import numpy as np
 import yaml
 from PIL import Image
 
-from simulation_app.simulation.heatmap import Heatmap
-from simulation_app.simulation.point_of_interest import PointOfInterest
+from simulation_app.simulation.pyglet.heatmap import Heatmap
+from simulation_app.simulation.model.point_of_interest import PointOfInterest
 from simulation_app.simulation.schedules_generator import SchedulesGenerator
-from simulation_app.simulation.spawn_point import SpawnPoint
-from simulation_app.simulation.timebox import Timebox
+from simulation_app.simulation.model.spawn_point import SpawnPoint
+from simulation_app.simulation.pyglet.timebox import Timebox
 import logging
 
 log = logging.getLogger('Simulation')
@@ -37,7 +37,7 @@ class Simulation:
 
         with open(config["pois_file"], 'r') as pois:
             pois = yaml.safe_load(pois)
-        self.pois = [PointOfInterest.from_dict(poi_name, pois[poi_name]) for poi_name in pois.keys()]
+        self.pois = [PointOfInterest.from_dict(pois[poi_id]) for poi_id in pois.keys()]
 
         with open(config["agents_file"], 'r') as agent_stats:
             agent_stats = yaml.safe_load(agent_stats)

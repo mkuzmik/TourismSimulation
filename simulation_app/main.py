@@ -1,7 +1,7 @@
 import pyglet
 from pyglet.window import mouse
 
-from simulation_app.simulation.map import Map
+from simulation_app.simulation.pyglet.map import Map
 from simulation_app.simulation.simulation import Simulation
 
 

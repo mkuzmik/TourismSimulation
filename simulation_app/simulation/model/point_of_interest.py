@@ -3,15 +3,17 @@ from time import strptime
 
 import pyglet
 
-from simulation_app.simulation.poilabel import PoiLabel
-from simulation_app.simulation.poilabelclosed import PoiLabelClosed
+from simulation_app.simulation.pyglet.poilabel import PoiLabel
+from simulation_app.simulation.pyglet.poilabelclosed import PoiLabelClosed
 
 
 class PointOfInterest:
 
-    def __init__(self, x, y, name, attractiveness, price, people_limit, time_needed, time_open, time_close, poi_type):
+    def __init__(self, x, y, name, coordinates, shape, attractiveness, price, people_limit, time_needed, time_open, time_close, poi_type):
         self.x = x
         self.y = y
+        self.coordinates = coordinates
+        self.shape = shape
         self.name = name
         self.is_end_point = False
 
@@ -35,15 +37,11 @@ class PointOfInterest:
         self.label = self.labelOpen
 
     @classmethod
-    def from_dict(cls, name, attributes):
+    def from_dict(cls, attributes):
         required_all = ["x", "y", "attractiveness", "price", "time_needed", "poi_type"]
         for required in required_all:
             if required not in attributes.keys():
                 raise ValueError("Required key in pois config file not found: {}".format(required))
-
-        if name == "" or name is None:
-            raise ValueError("Name can't be empty")
-        attributes["name"] = name
 
         return PointOfInterest(**attributes)
 

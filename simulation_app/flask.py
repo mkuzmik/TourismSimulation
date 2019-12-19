@@ -7,7 +7,7 @@ import simulation_app.simulation.simulation_runner as simulation_runner
 from simulation_app.exception.app_exceptions import AppException, FatalException
 import logging
 
-from flask import Flask
+from flask import Flask, jsonify
 
 log = logging.getLogger('Main')
 
@@ -36,6 +36,10 @@ def create_app(test_config=None):
     @app.route('/status')
     def health_check():
         return 'Alive'
+
+    @app.route('/status/pois')
+    def pois():
+        return jsonify(simulation_runner.simulation_service.get_instance().poi_mapper.find_all_pois())
 
     @app.route('/simulation/start')
     def start_simulation():
