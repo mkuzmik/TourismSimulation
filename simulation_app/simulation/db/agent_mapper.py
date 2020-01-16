@@ -42,10 +42,17 @@ class AgentMapper:
         log.debug('Fetching agents positions from DB')
         cursor = self.db.get_cursor()
         cursor.execute('''
-        SELECT x, y FROM agent_spacetime_location
+        SELECT x, y
+        FROM agent_spacetime_location
+        WHERE simulation_time = (
+            SELECT max(simulation_time)
+            FROM agent_spacetime_location)
+        group by agent_id, x, y
         ''')
         agents = cursor.fetchall()
-        return [{'x': agent[0], 'y': agent[1]} for agent in agents]
+        fx = lambda x: int((x-510.247) * (-0.66145))
+        fy = lambda y: int((y-3522.75) * (-0.304017))
+        return [{'x': fx(agent[0]), 'y': fy(agent[1])} for agent in agents]
 
 INSTANCE = AgentMapper(db=db_connection.get_instance())
 
